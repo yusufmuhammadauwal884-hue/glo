@@ -20,8 +20,8 @@ public class Transaction {
     private String transactionId;
 
     @NotBlank(message = "MSISDN cannot be empty")
-    @Pattern(regexp = "\\d{11,15}", message = "MSISDN must be between 11 and 15 digits")
-    @Column(nullable = false, length = 15)
+    @Pattern(regexp = "\\d{11}", message = "MSISDN must be between 11 digits")
+    @Column(nullable = false, length = 11)
     private String msisdn;
 
     @Enumerated(EnumType.STRING)
