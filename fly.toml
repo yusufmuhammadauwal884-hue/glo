@@ -1,0 +1,10 @@
+app = "glovendor-backend"
+
+[build]
+  image = ""
+
+[env]
+  PORT = "8080"
+
+[deploy]
+  release_command = ""
