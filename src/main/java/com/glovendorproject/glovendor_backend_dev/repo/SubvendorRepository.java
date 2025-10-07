@@ -10,6 +10,9 @@ public interface SubvendorRepository extends JpaRepository<Subvendor, Long> {
     // Find by unique business name
     Optional<Subvendor> findByBusinessname(String businessname);
 
+    // Find by email (used for authentication)
+    Optional<Subvendor> findByEmail(String email);
+
     // Check if a subvendor exists with a given business name
     boolean existsByBusinessname(String businessname);
 }

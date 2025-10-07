@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "subvendors")
@@ -35,6 +37,15 @@ public class Subvendor {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String address;
 
+    @JsonIgnore
+    @Column(name = "password_hash", columnDefinition = "TEXT")
+    private String passwordHash;
+
+    // Plain-text password coming from signup requests - not persisted
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Transient
+    private String password;
+
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
@@ -47,6 +58,22 @@ public class Subvendor {
         this.email = email;
         this.phone = phone;
         this.address = address;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     // Getters and Setters

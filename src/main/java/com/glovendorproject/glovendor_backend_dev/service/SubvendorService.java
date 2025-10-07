@@ -22,6 +22,12 @@ public class SubvendorService {
         if (subvendorRepository.existsByBusinessname(subvendor.getBusinessname())) {
             throw new RuntimeException("Business name already exists: " + subvendor.getBusinessname());
         }
+        // Hash password if provided
+        if (subvendor.getPassword() != null && !subvendor.getPassword().isEmpty()) {
+            org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder encoder = new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
+            subvendor.setPasswordHash(encoder.encode(subvendor.getPassword()));
+        }
+
         return subvendorRepository.save(subvendor);
     }
 
@@ -38,6 +44,11 @@ public class SubvendorService {
     // Get one subvendor by businessname
     public Optional<Subvendor> getSubvendorByBusinessname(String businessname) {
         return subvendorRepository.findByBusinessname(businessname);
+    }
+
+    // Find by email (used for authentication)
+    public Optional<Subvendor> findByEmail(String email) {
+        return subvendorRepository.findByEmail(email);
     }
 
     // Update subvendor
