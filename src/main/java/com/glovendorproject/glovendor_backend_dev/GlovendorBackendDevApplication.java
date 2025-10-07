@@ -8,7 +8,7 @@ public class GlovendorBackendDevApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GlovendorBackendDevApplication.class, args);
-		System.out.println("Astagfirullah!");
+		System.out.println("Alhamdulillah!");
 	}
 
 }
